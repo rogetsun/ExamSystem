@@ -1,0 +1,72 @@
+<form class="form-horizontal" style="margin-left: auto;margin-right: auto;">
+    <div class="form-group">
+        <label class="control-label col-sm-2">考试标题</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control" ng-model="exam.exam_title">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2">考试课程</label>
+        <div class="col-sm-5">
+            <input type="text" ng-click="selectCourse()" ng-keypress="selectCourse()" class="form-control"
+                   ng-value="course_json[exam.cos_id].cos_name"
+                   readonly placeholder="请选择课程">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2">考试试卷</label>
+        <div class="col-sm-5">
+            <select ng-options="p.paper_id as p.paper_title for p in papers" ng-model="exam.paper_id"
+                    ng-change="setExamPaper()"
+                    class="form-control pull-left" style="position: relative;">
+            </select>
+
+        </div>
+        <div class="col-sm-3" ng-show="exam.paper_id">
+            <span class="text-right" style="height: 34px;line-height: 34px;width:95px;">
+                <label>总分{{exam.score}},及格分:</label>
+            </span>
+            <span style="width: 50px;">
+            <input type="text" ng-model="exam.pass_score" class="form-control"
+                   style="position: relative;display:inline-block;width: 52px;"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2">开考时间</label>
+        <div class="col-sm-5">
+            <input type="text" ng-model="exam.begin_time" class="form-control" uv-date-time-picker readonly
+                   style="background-color: #f2f2f2;" placeholder="请选择开考时间">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2">考试时长</label>
+        <div class="col-sm-5">
+            <div class="input-group">
+                <input type="text" ng-model="exam.duration" class="form-control" placeholder="请输入考试时长">
+                <span class="input-group-addon">分钟</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-sm-2">发布班级</label>
+        <div class="col-sm-10">
+            <div class="well well-sm" style="padding:0;">
+                <div class="btn btn-link">
+                    <a href="" ng-click="selectClass()">点击选择参加考试班级</a>
+                </div>
+                <div style="padding:0 10px 8px;" ng-show="exam.classes && exam.classes.length > 0">
+                    <span ng-repeat="c in exam.classes | limitTo:20" class="btn btn-xs btn-default"
+                          style="margin-right: 2px;">{{c.cls_no}}</span>
+                    <span ng-show="exam.classes.length > 20">......</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <a href="" class="btn btn-primary" ng-click="publishExam()">确定发布</a>
+            <a href="" class="btn btn-default" ng-click="exam={}">重置取消</a>
+        </div>
+    </div>
+</form>

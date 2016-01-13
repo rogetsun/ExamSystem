@@ -1,0 +1,26 @@
+<div class="panel panel-primary"
+     style="margin:-160px -230px -20px;width: 900px;position: relative;">
+    <div class="panel-heading" style="position: relative;">课程选择</div>
+    <div class="panel-body" style="position: relative;padding: 2px 10px;">
+        <form style="position: relative;display: block;overflow: auto;min-height: 50vh;max-height: 75vh;margin-right: 5px;padding: 0;">
+            <div ng-repeat="t in titles">
+                <label id="{{t}}" style="font-size: 13px;margin:1px;">{{t}}</label>
+                <div>
+                    <span class="btn btn-default btn-xs" style="margin-right: 2px;"
+                          ng-repeat="c in cs[t]" ng-click="closeThisDialog(c)">{{c.cos_name}}</span>
+                </div>
+            </div>
+            <div ng-show="!titles || titles.length ==0">
+                没有可选课程,请先创建.
+            </div>
+        </form>
+        <div style="position: absolute;display: block;width:20px;right:0;top:0; color: #aaa;">
+            <span class="text-center" ng-repeat="t in titles" ng-click="goto(t)"
+                  style="display: block;cursor:pointer;margin:1px;padding:1px;font-size: 13px;height: 15px;">{{t}}</span>
+        </div>
+    </div>
+    <div class="panel-footer" style="position: relative;overflow: auto;">
+        <a href="" class="btn btn-sm btn-default pull-right" ng-click="closeThisDialog()"
+           style="margin-right: 5px;">取消</a>
+    </div>
+</div>

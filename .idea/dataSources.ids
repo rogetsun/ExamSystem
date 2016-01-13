@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - exam@localhost" uuid="d641f4e2-aa02-43ac-a458-4502d8c05c41">
+    <database-info product="MySQL" version="5.1.63" jdbc-version="3.0" driver-name="MySQL-AB JDBC Driver" driver-version="mysql-connector-java-5.1.6 ( Revision: ${svn.Revision} )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="exam"/>
+    <table name="class" schema="" catalog="exam" type="TABLE">
+      <column name="cls_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="cls_no" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12" remarks="54+t5Y+3"/>
+      <column name="major_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" remarks="5LiT5LiaSUQ="/>
+      <column name="begin_time" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12" remarks="5byA54+t5pe26Ze0"/>
+      <column name="end_time" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12" remarks="5q+V5Lia5pe26Ze0"/>
+      <column name="note" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="cls_id"/>
+    </table>
+    <table name="course" schema="" catalog="exam" type="TABLE">
+      <column name="cos_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="cos_name" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12" remarks="6K++56iL5ZCN56ew"/>
+      <column name="cos_credit" sqlType="VARCHAR" precision="5" scale="0" nullable="false" jdbcType="12" remarks="5a2m5YiG"/>
+      <primary-key name="PRIMARY" columns="cos_id"/>
+    </table>
+    <table name="exam_publish" schema="" catalog="exam" type="TABLE">
+      <column name="exam_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="cls_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+    </table>
+    <table name="exam_score" schema="" catalog="exam" type="TABLE">
+      <column name="exam_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" remarks="6ICD6K+VSUQ="/>
+      <column name="std_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" remarks="5a2m55SfSUQ="/>
+      <column name="score" sqlType="VARCHAR" precision="5" scale="0" nullable="true" jdbcType="12" remarks="5oiQ57up"/>
+    </table>
+    <table name="examination" schema="" catalog="exam" type="TABLE">
+      <column name="exam_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="exam_title" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12" remarks="6ICD6K+V5qCH6aKY"/>
+      <column name="cos_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" remarks="6ICD6K+V6K++56iL"/>
+      <column name="paper_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" remarks="6ICD6K+V6K+V5Y23"/>
+      <column name="score" sqlType="VARCHAR" precision="5" scale="0" nullable="true" jdbcType="12" remarks="6ICD6K+V5oC75YiG"/>
+      <column name="pass_score" sqlType="VARCHAR" precision="5" scale="0" nullable="false" jdbcType="12" def="JzYwJw==" remarks="5Y+K5qC85YiG"/>
+      <column name="begin_time" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12" remarks="6ICD6K+V5byA5aeL5pe26Ze0"/>
+      <column name="duration" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12" remarks="6ICD6K+V5pe26ZW/"/>
+      <primary-key name="PRIMARY" columns="exam_id"/>
+    </table>
+    <table name="faculty" schema="" catalog="exam" type="TABLE">
+      <column name="fac_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="fac_name" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="fac_id"/>
+    </table>
+    <table name="faculty_major" schema="" catalog="exam" type="TABLE">
+      <column name="fac_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="major_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+    </table>
+    <table name="major" schema="" catalog="exam" type="TABLE">
+      <column name="major_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="major_name" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12" remarks="5LiT5Lia5ZCN56ew"/>
+      <column name="major_no" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12" remarks="5LiT5Lia57yW5Y+3"/>
+      <column name="fac_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" remarks="5omA5bGe6Zmi57O7"/>
+      <primary-key name="PRIMARY" columns="major_id"/>
+    </table>
+    <table name="major_course" schema="" catalog="exam" type="TABLE">
+      <column name="major_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="cos_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+    </table>
+    <table name="paper" schema="" catalog="exam" type="TABLE">
+      <column name="paper_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="cos_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="paper_title" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="score" sqlType="VARCHAR" precision="5" scale="0" nullable="true" jdbcType="12" remarks="5oC75YiG"/>
+      <column name="pass_score" sqlType="VARCHAR" precision="5" scale="0" nullable="true" jdbcType="12" remarks="5Y+K5qC85YiG5pWw"/>
+      <primary-key name="PRIMARY" columns="paper_id"/>
+    </table>
+    <table name="paper_question" schema="" catalog="exam" type="TABLE">
+      <column name="paper_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="qt_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="score" sqlType="VARCHAR" precision="5" scale="0" nullable="false" jdbcType="12" def="JzEn" remarks="5YiG5YC8"/>
+    </table>
+    <table name="question" schema="" catalog="exam" type="TABLE">
+      <column name="qt_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="cos_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" remarks="5omA5bGe6K++56iLSUQ="/>
+      <column name="qt_content" sqlType="VARCHAR" precision="250" scale="0" nullable="false" jdbcType="12"/>
+      <column name="is_multi" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" remarks="MTrlpJrpgInpopgsMDrljZXpgInpopg="/>
+      <primary-key name="PRIMARY" columns="qt_id"/>
+    </table>
+    <table name="question_option" schema="" catalog="exam" type="TABLE">
+      <column name="opt_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="qt_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="opt_title" sqlType="VARCHAR" precision="2" scale="0" nullable="true" jdbcType="12"/>
+      <column name="opt_content" sqlType="VARCHAR" precision="250" scale="0" nullable="true" jdbcType="12"/>
+      <column name="is_right" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" remarks="MTrmraPnoa7nrZTmoYg="/>
+      <primary-key name="PRIMARY" columns="opt_id"/>
+    </table>
+    <table name="student" schema="" catalog="exam" type="TABLE">
+      <column name="std_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="std_login" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12" remarks="5a2m5Y+3"/>
+      <column name="std_name" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="std_passwd" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="std_gender" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1" remarks="5a2m55Sf5oCn5Yir"/>
+      <column name="in_time" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12" remarks="5YWl5a2m5pe26Ze0TE9ORw=="/>
+      <column name="cls_no" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12" remarks="54+t5Y+3"/>
+      <primary-key name="PRIMARY" columns="std_id"/>
+    </table>
+    <table name="student_course" schema="" catalog="exam" type="TABLE">
+      <column name="std_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="cos_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="score" sqlType="VARCHAR" precision="5" scale="0" nullable="true" jdbcType="12"/>
+      <column name="is_pass" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1"/>
+      <column name="exam_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+    </table>
+    <table name="student_course_exam" schema="" catalog="exam" type="TABLE">
+      <column name="std_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="cos_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="score" sqlType="VARCHAR" precision="5" scale="0" nullable="true" jdbcType="12"/>
+      <column name="is_pass" sqlType="CHAR" precision="1" scale="0" nullable="true" jdbcType="1"/>
+      <column name="exam_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+    </table>
+    <table name="student_exam" schema="" catalog="exam" type="TABLE">
+      <column name="exam_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" remarks="6ICD6K+VSUQ="/>
+      <column name="std_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" remarks="5a2m55SfSUQ="/>
+      <column name="score" sqlType="VARCHAR" precision="5" scale="0" nullable="true" jdbcType="12" remarks="5oiQ57up"/>
+    </table>
+    <table name="teacher" schema="" catalog="exam" type="TABLE">
+      <column name="tch_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="tch_login" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12" remarks="5bel5Y+3"/>
+      <column name="tch_name" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="tch_passwd" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="in_time" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12" remarks="5YWl6IGM5pe26Ze0"/>
+      <column name="tch_title" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12" remarks="6IGM56ew"/>
+      <column name="tch_gender" sqlType="VARCHAR" precision="1" scale="0" nullable="true" jdbcType="12" remarks="5oCn5Yir"/>
+      <column name="note" sqlType="VARCHAR" precision="250" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="tch_id"/>
+    </table>
+  </data-source>
+</component>

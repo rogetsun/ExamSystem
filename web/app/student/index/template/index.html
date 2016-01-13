@@ -1,0 +1,125 @@
+<div class="header navbar-fixed-top">
+    <div class="logo-container">
+        <span class="logo"><a ui-sref="index" ui-sref-opts="{reload:true}">XX考试管理系统</a></span>
+    </div>
+    <div class="header-menu">
+        <ul>
+            <li>
+                {{now|date:'yyyy-MM-dd HH:mm:ss'}}
+            </li>
+            <li><i class="glyphicon glyphicon-user"></i>&nbsp;{{login_user.std_name}}
+                <ul>
+                    <li ng-click="modify_password()">修改密码</li>
+                    <li class="separator"><i></i></li>
+                    <li ng-click="logout()">退出</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<div style="padding:0 20px;position: relative;display: block;">
+    <div class="page-header">
+        <h3>当前考试</h3>
+    </div>
+    <div style="display: block;position: relative;overflow: auto;">
+        <p ng-show="!exams || exams.length==0">暂无</p>
+        <div ng-repeat="e in exams" class="panel panel-primary pull-left">
+            <div class="panel-heading">{{e.cos_name}}</div>
+            <div class="panel-body">
+                <p>{{e.exam_title}}</p>
+                <p>开考时间:{{e.begin_time|date:'yyyy-MM-dd HH:mm'}}</p>
+                <p>考试时长:{{e.duration}}</p>
+                <a href="" ui-sref="index.exam({exam_id:e.exam_id})" class="btn btn-sm btn-primary">参加考试</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="padding:0 20px;position: relative;display: block;">
+    <div class="page-header">
+        <h3>历史考试成绩</h3>
+    </div>
+    <div style="position: relative;display: block;">
+        <p ng-show="!his_courses || his_courses.length==0">暂无</p>
+        <div class="col-md-2 col-xs-4 col-sm-3 pull-left" ng-repeat="c in his_courses|orderBy:'$index':true">
+            <div class="panel" ng-class="c.is_pass=='1'?'panel-success':'panel-danger'" ng-click="showCourseExamHis(c)"
+                 style="cursor:pointer;">
+                <div class="panel-heading">{{c.cos_name}}</div>
+                <div class="panel-body">
+                    <p>{{c.exam_title}}</p>
+                    <p>成绩:{{c.score}}</p>
+                    <p>{{c.is_pass=='1'?'通过':'挂科'}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script type="text/ng-template" id="change_password_dialog">
+    <div class="panel panel-primary" style="margin:-20px;">
+        <div class="panel-heading">[{{user.std_login}}:{{user.std_name}}]密码修改</div>
+        <div class="panel-body">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">原密码</label>
+                    <div class="col-sm-8">
+                        <input ng-model="old_password" type="password" class="form-control"
+                               placeholder="请输入名称">
+                        <p ng-show="valid.old_password" style="font-size: 12px;color:darkred;">
+                            {{valid.old_password}}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">新密码</label>
+                    <div class="col-sm-8">
+                        <input ng-model="new_password" type="password" class="form-control" placeholder="请输入名称">
+                        <p ng-show="valid.new_password" style="font-size: 12px;color:darkred;">
+                            {{valid.new_password}}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">重复新密码</label>
+                    <div class="col-sm-8">
+                        <input ng-model="new_password_repeat" type="password" class="form-control" placeholder="请输入名称">
+                        <p ng-show="valid.new_password_repeat" style="font-size: 12px;color:darkred;">
+                            {{valid.new_password_repeat}}</p>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <div class="panel-footer" style="overflow: hidden;">
+            <button class="btn btn-sm btn-info pull-right" ng-click="change_password()">确定
+            </button>
+            <a class="btn btn-sm btn-default pull-right" ng-click="closeThisDialog()" style="margin-right:5px;">取消</a>
+        </div>
+    </div>
+</script>
+
+
+<script type="text/ng-template" id="exam_his_dialog">
+    <div class="panel panel-default" style="margin:-120px -300px;width:1000px;">
+        <div class="panel-heading">{{_course.cos_name}}考试记录</div>
+        <table class="table table-condensed table-striped">
+            <!--<caption>{{_course.cos_name}}考试记录</caption>-->
+            <thead>
+            <th class="col-sm-1">#</th>
+            <th>考试标题</th>
+            <th class="col-sm-3">考试时间</th>
+            <th class="col-sm-1">分数</th>
+            </thead>
+            <tr ng-repeat="e in _course.exams" ng-class="e.score > e.pass_score?'success':'danger'">
+                <td>{{$index+1}}</td>
+                <td>{{e.exam_title}}</td>
+                <td>{{e.begin_time | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                <td>{{e.score}}</td>
+            </tr>
+        </table>
+        <div class="panel-footer" style="overflow: hidden;">
+            <button class="btn btn-sm btn-info pull-right" ng-click="closeThisDialog()">关闭</button>
+        </div>
+    </div>
+</script>

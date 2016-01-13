@@ -1,0 +1,71 @@
+<div class="row">
+    <span class="col-sm-1">
+    </span>
+    <span class="col-sm-5">
+        <input type="text" ng-model="query.cos_name" class="form-control" placeholder="输入课程名称过滤">
+    </span>
+    <span class="col-sm-4">
+        <input type="text" ng-model="query.cos_credit" class="form-control" placeholder="输入课程学分过滤">
+    </span>
+    <span class="col-sm-2">
+        <a href="" class="btn btn-primary pull-right" ng-click="add()">新增课程</a>
+    </span>
+</div>
+<hr>
+<table class="table table-condensed table-striped table-hover">
+    <thead>
+    <th class="col-sm-1">#</th>
+    <th class="col-sm-5" style="padding-left: 11px;">课程名称</th>
+    <th class="col-sm-4" style="padding-left: 27px;">课程学分</th>
+    <th class="col-sm-2">
+        <i class="glyphicon glyphicon-cog pull-right" style="right: 5px;"></i>
+    </th>
+    </thead>
+    <tr ng-repeat="c in courses | filter:query">
+        <td>{{$index + 1}}</td>
+        <td style="padding-left: 11px;">{{c.cos_name}}</td>
+        <td style="padding-left: 27px;">{{c.cos_credit}}</td>
+        <td class="text-right">
+            <a href="" class="btn btn-link btn-xs" ng-click="modify(c)" tooltip="修改"
+               tooltip-popup-delay="1000">
+                <i class="glyphicon glyphicon-pencil"></i>
+            </a>
+            <a href="" class="btn btn-link btn-xs" ng-click="del(c)" tooltip="删除"
+               tooltip-popup-delay="1000">
+                <i class="glyphicon glyphicon-trash text-danger"></i>
+            </a>
+        </td>
+    </tr>
+</table>
+
+
+<script type="text/ng-template" id="data-input">
+    <div class="panel panel-primary" style="margin:-20px;">
+        <div class="panel-body">
+            <br>
+
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">课程名称</label>
+
+                    <div class="col-sm-8">
+                        <input ng-model="_cos_name" type="text" class="form-control" placeholder="请输入课程名称">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">课程学分</label>
+
+                    <div class="col-sm-8">
+                        <input ng-model="_cos_credit" type="text" class="form-control" placeholder="请输入课程学分">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="panel-footer" style="overflow: hidden;">
+            <button class="btn btn-sm btn-primary pull-right"
+                    ng-click="closeThisDialog({cos_name:_cos_name, cos_credit:_cos_credit})">确定
+            </button>
+            <a class="btn btn-sm btn-default pull-right" ng-click="closeThisDialog()" style="margin-right:5px;">取消</a>
+        </div>
+    </div>
+</script>

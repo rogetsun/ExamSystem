@@ -1,0 +1,58 @@
+<div class="header navbar-fixed-top text-center">
+    <span style="font-size: 20px;color: #ccc;">{{exam.cos_name}}-{{exam.exam_title}}</span>
+    <button class="btn btn-primary pull-left" style="margin: 8px 10px" ng-click="confirmExam()">交卷</button>
+    <span class="pull-left"
+          ng-class="left_seconds<600000?'text-danger':'text-success'">
+        剩余时间:{{left_seconds|timer}}
+    </span>
+    <span class="pull-right" style="margin:0 10px;color: #ccc;">{{login_user.std_login}}-{{login_user.std_name}}</span>
+</div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <table class="table table-condensed">
+            <caption class="text-center">{{exam.paper.paper_title}}</caption>
+            <tr ng-repeat="q in exam.paper.questions">
+                <td>
+                    <div>
+                        {{q.qt_content}}<br>
+                        ({{q.is_multi=='1'?'多选题':'单选题'}},{{q.score}}分)
+                    </div>
+                    <div>
+                        <button class="btn btn-xs " ng-repeat="opt in q.options"
+                                ng-class="opt.selected==1?'btn-success':'btn-default'"
+                                style="margin: 3px;" ng-click="selectOpt(q, opt)">
+                            {{opt.opt_title}}：{{opt.opt_content}}
+                            <i class="glyphicon glyphicon-ok" ng-show="opt.selected==1"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="waiting" ng-show="wait_flag">
+    <div class="clock"
+         uv-clock uv-clock-timestamp="{{last_seconds}}"
+         uv-clock-countdown="1" uv-clock-face="DailyCounter" uv-clock-stop-callback="timeout()">
+    </div>
+</div>
+<style>
+    .waiting {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 100vw;
+        background-color: rgba(0, 0, 0, 0.6);
+        z-index: 999999998;
+    }
+
+    .waiting .clock {
+        position: relative;
+        height: 90px;
+        width: 620px;
+        z-index: 999999999;
+        margin: -85px auto;
+        top: 50%;
+    }
+</style>

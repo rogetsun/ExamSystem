@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+        PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="Teacher">
+
+    <select id="selectAll" resultClass="net.sf.json.JSONObject">
+        select * from teacher
+    </select>
+    <select id="selectByID" resultClass="net.sf.json.JSONObject" parameterClass="int">
+        select * from teacher where tch_id = #id#
+    </select>
+
+    <update id="update" parameterClass="java.util.HashMap">
+        update teacher
+        set tch_login=#tch_login#, tch_name=#tch_name#, in_time=#in_time#,tch_title=#tch_title#, tch_gender=#tch_gender#
+        where tch_id=#tch_id#
+    </update>
+
+    <update id="updatePassword" parameterClass="java.util.HashMap">
+        update teacher set tch_passwd=#tch_passwd# where tch_id=#tch_id#
+    </update>
+    <insert id="insert" parameterClass="java.util.HashMap">
+        insert into teacher (tch_login,tch_name, tch_passwd, in_time, tch_title, tch_gender)
+        values( #tch_login#,#tch_name#,md5(md5('123456')), #in_time#, #tch_title#, #tch_gender#)
+        <selectKey resultClass="int" type="post">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <delete id="deleteByID" parameterClass="int">
+        delete from teacher where tch_id=#id#
+    </delete>
+
+</sqlMap>

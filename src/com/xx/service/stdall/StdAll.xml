@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+        PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="StdAll">
+
+    <update id="changePassword" parameterClass="java.util.Map">
+        update student set std_passwd=#std_passwd# where std_id=#std_id#
+    </update>
+
+    <select id="selectExamsByStdID" resultClass="net.sf.json.JSONObject" parameterClass="int">
+        SELECT a.*, e.cos_name, e.cos_credit
+        FROM examination a, exam_publish b, class c, student d, course e
+        WHERE a.exam_id = b.exam_id AND b.cls_id = c.cls_id AND d.cls_no = c.cls_no
+        AND a.begin_time + (a.duration * 60 * 1000) > unix_timestamp() * 1000
+        AND a.cos_id = e.cos_id
+        AND d.std_id = #id#
+    </select>
+
+    <select id="selectHisCoursesByStdID" parameterClass="int" resultClass="net.sf.json.JSONObject">
+        SELECT
+        a.*,
+        b.cos_name,
+        b.cos_credit,
+        c.exam_title
+        FROM student_course_exam a, course b, examination c
+        WHERE a.cos_id = b.cos_id
+        and a.exam_id = c.exam_id
+        AND a.std_id = #id#
+    </select>
+
+    <select id="selectExamByStdIDAndExamID" parameterClass="java.util.Map" resultClass="net.sf.json.JSONObject">
+        SELECT
+        a.*,
+        c.cos_name
+        FROM examination a, exam_publish b, course c, class d, student e
+        WHERE a.exam_id = b.exam_id
+        AND a.cos_id = c.cos_id
+        AND b.cls_id = d.cls_id
+        AND d.cls_no = e.cls_no
+        AND e.std_id = #std_id#
+        AND a.exam_id = #exam_id#
+    </select>
+
+    <select id="selectStdExamByStdIDExamID" parameterClass="java.util.Map" resultClass="net.sf.json.JSONObject">
+        select * from student_exam where std_id=#std_id# and exam_id=#exam_id#
+    </select>
+
+    <select id="selectStdCourseExam" parameterClass="java.util.Map" resultClass="net.sf.json.JSONObject">
+        select * from student_course_exam where std_id=#std_id# and cos_id=#cos_id#
+    </select>
+
+    <select id="selectStdCourseExams" parameterClass="java.util.Map" resultClass="net.sf.json.JSONObject">
+        select a.*, b.score from examination a, student_exam b
+        where a.exam_id = b.exam_id
+        and a.cos_id = #cos_id#
+        and b.std_id = #std_id#
+    </select>
+
+    <insert id="insertStdExam" parameterClass="java.util.Map">
+        insert into student_exam (std_id, exam_id, score)
+        values(#std_id#, #exam_id#, #score#)
+    </insert>
+
+    <insert id="insertStdCourseExam" parameterClass="java.util.Map">
+        insert into student_course_exam(std_id, cos_id, exam_id, score, is_pass)
+        values(#std_id#, #cos_id#, #exam_id#, #score#, #is_pass#)
+    </insert>
+
+    <update id="updateStdCourseExam" parameterClass="java.util.Map">
+        update student_course_exam
+        set score=#score#, is_pass=#is_pass#, exam_id=#exam_id#
+        where std_id=#std_id# and cos_id=#cos_id#
+    </update>
+
+</sqlMap>

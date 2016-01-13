@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="assets/css/login.min.css">
+</head>
+<body>
+<div class="login-container">
+    <div style="position: fixed;left:10px;top:0;display:block;z-index: 999;text-align: left;font-size: 13px;color:#555;">
+        <p>
+            计算机系XXXX制作
+        </p>
+    </div>
+    <div class="login-logo">
+        <h1>考试管理系统</h1>
+
+
+    </div>
+    <div class="login-info">
+        <div class="login-user login-row">
+            <i class="icon-user login-icon"></i>
+            <input type="text" id="login_no">
+            <span class="login-tip"></span>
+        </div>
+        <div class="login-password login-row">
+            <i class="icon-key login-icon"></i>
+            <input type="password" id="login_password">
+            <span class="login-tip"></span>
+        </div>
+        <div class="login-row">
+            <!--<label for="remeberme">-->
+            <!--<input id="remeberme" type="checkbox" value="1">记住我-->
+            <!--</label>-->
+            <button id="login-btn">登录</button>
+        </div>
+        <!--<div class="login-row">-->
+        <!--<a href="/register">新用户注册</a>-->
+        <!--&nbsp;-->
+        <!--<a href="/com-register">企业用户注册</a>-->
+
+        <!--</div>-->
+    </div>
+
+</div>
+</body>
+<script src="assets/public/jquery/jquery-1.11.2.min.js"></script>
+<script src="assets/diy/MD5.js"></script>
+<script>
+    (function () {
+
+        var showtip = function (dom, msg) {
+            var tip = dom.siblings('.login-tip');
+            if (!!msg) {
+                tip.css({'display': 'block'});
+                tip.html(msg);
+            } else {
+                tip.css('display', 'none');
+                return true;
+            }
+        };
+        /***
+         * 检验input输入内容不能为空
+         * @param dom
+         * @returns {boolean}
+         */
+        var check_input = function (dom) {
+            var $dom = $(dom);
+            if (!$dom.val()) {
+                var msg = "请输入" + (($dom.attr('id') == 'login_no') ? '员工编号' : '密码');
+                console.log(msg);
+                showtip($dom, msg);
+                return false;
+            } else {
+                showtip($dom);
+                return true;
+            }
+        };
+
+        /**
+         * 提交登录信息
+         */
+        $('#login-btn').click(function () {
+            var login_no = $('#login_no');
+            var login_password = $('#login_password');
+            if (check_input(login_no) && check_input(login_password)) {
+                $.post('login', {
+                            login_no: login_no.val(),
+                            login_password: md5(login_password.val())
+                        })
+                        .then(function (res) {
+                            console.log(res);
+                            if (res && res.ret_code == 0) {
+                                window.location.reload(1);
+                            } else {
+                                if (res.ret_code == 1) {
+                                    showtip(login_no, res.ret_msg);
+                                } else {
+                                    showtip(login_password, res.ret_msg);
+                                }
+
+                            }
+                        })
+            }
+        });
+
+        $('#login_no, #login_password')
+                .blur(function () {
+                    check_input(this);
+                })
+                .on('keyup', function ($event) {
+                    if ($event.which == 13) {
+                        $('#login-btn').click();
+                    }
+                });
+
+    })();
+</script>
+
+
+</html>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMapConfig
+        PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+    <properties resource="DBConfig-mysql.properties"/>
+
+    <settings
+            cacheModelsEnabled="true"
+            enhancementEnabled="true"
+            maxSessions="228"
+            maxTransactions="128"
+            maxRequests="1000"
+            useStatementNamespaces="true"
+    />
+
+    <!--
+        Configure a built-in transaction manager. If you're using an app
+        server, you probably want to use its transaction manager and a managed
+        datasource
+    -->
+    <transactionManager type="JDBC" commitRequired="false">
+        <dataSource type="DBCP">
+            <property name="JDBC.Driver" value="${driver}"/>
+            <property name="JDBC.ConnectionURL" value="${serverURL}"/>
+            <property name="JDBC.Username" value="${username}"/>
+            <property name="JDBC.Password" value="${password}"/>
+            <property name="JDBC.DefaultAutoCommit" value="false"/><!-- jdbc autocommit属性值 -->
+            <!-- 数据库连接池可维持的最大容量  -->
+            <property value="${MaximumActiveConnections}" name="Pool.MaximumActiveConnections"/>
+            <!-- 数据库连接池中，任务被某个连接所占用的最大时间，如果超过这个限定，连接将会被强制收回(毫秒)  -->
+            <property name="Pool.MaximumCheckoutTime" value="${MaximumCheckoutTime}"/>
+            <!--   数据库连接状态检查语句
+            <property name="Pool.PingQuery" value="select 1 as ISPINGWORKING" />
+              -->
+            <property name="Pool.ValidationQuery" value="select 1 as ISPINGWORKING"/>
+            <!-- 当数据库连接被废弃时，是否打印日志 -->
+            <property name="Pool.LogAbandoned" value="true"/>
+            <!--   是否允许连接检测状态  -->
+            <property name="Pool.PingEnabled" value="${PingEnabled}"/>
+            <!--  对空闲超过设定值(毫秒)的连接进行检测  -->
+            <property name="Pool.PingConnectionsNotUsedFor" value="${PingConnectionsNotUsedFor}"/>
+            <!-- 对持续连接时间超过设定值(毫秒)连接进行检测  -->
+            <property name="Pool.PingConnectionsOlderThan" value="${PingConnectionsOlderThan}"/>
+        </dataSource>
+    </transactionManager>
+
+    <sqlMap resource="com/xx/service/login/User.xml"/>
+    <sqlMap resource="com/xx/service/faculty/Faculty.xml"/>
+    <sqlMap resource="com/xx/service/major/Major.xml"/>
+    <sqlMap resource="com/xx/service/course/Course.xml"/>
+    <sqlMap resource="com/xx/service/teacher/Teacher.xml"/>
+    <sqlMap resource="com/xx/service/cls/Class.xml"/>
+    <sqlMap resource="com/xx/service/student/Student.xml"/>
+    <sqlMap resource="com/xx/service/question/Question.xml"/>
+    <sqlMap resource="com/xx/service/question/QuestionOption.xml"/>
+    <sqlMap resource="com/xx/service/paper/Paper.xml"/>
+    <sqlMap resource="com/xx/service/paper/PaperQuestion.xml"/>
+    <sqlMap resource="com/xx/service/exam/Exam.xml"/>
+    <sqlMap resource="com/xx/service/exam/ExamPublish.xml"/>
+
+    <sqlMap resource="com/xx/service/stdall/StdAll.xml"/>
+
+</sqlMapConfig>

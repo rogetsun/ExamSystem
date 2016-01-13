@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+        PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="Exam">
+
+    <select id="selectAll" resultClass="net.sf.json.JSONObject">
+        select * from examination order by begin_time desc
+    </select>
+    <select id="selectByID" resultClass="net.sf.json.JSONObject" parameterClass="int">
+        select * from examination where Exam_id = #id#
+    </select>
+
+    <select id="selectByCosID" resultClass="net.sf.json.JSONObject" parameterClass="int">
+        select * from examination where cos_id = #id# order by begin_time desc
+    </select>
+    <!--exam_id    INT PRIMARY KEY     AUTO_INCREMENT,
+      exam_title VARCHAR(100) COMMENT '考试标题',
+      cos_id     INT        NOT NULL
+      COMMENT '考试课程',
+      paper_id   INT COMMENT '考试试卷',
+      score      VARCHAR(5) COMMENT '考试总分',
+      pass_score VARCHAR(5) NOT NULL DEFAULT '60'
+      COMMENT '及格分',
+      begin_time VARCHAR(20) COMMENT '考试开始时间',
+      duration   VARCHAR(20) COMMENT '考试时长'-->
+    <update id="update" parameterClass="java.util.HashMap">
+        update examination
+        set exam_title=#exam_title#, cos_id=#cos_id#,paper_id=#paper_id#, pass_score=#pass_score#, score=#score#,
+        begin_time =#begin_time#,duration=#duration#
+        where exam_id=#exam_id#
+    </update>
+
+    <insert id="insert" parameterClass="java.util.HashMap">
+        insert into examination (exam_title, cos_id, paper_id, score, pass_score, begin_time, duration)
+        values(#exam_title#, #cos_id#, #paper_id#,#score#, #pass_score#,#begin_time#,#duration#)
+        <selectKey resultClass="int" type="post">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <delete id="deleteByID" parameterClass="int">
+        delete from examination where exam_id=#id#
+    </delete>
+
+</sqlMap>

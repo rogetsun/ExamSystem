@@ -1,0 +1,178 @@
+<div class="panel panel-default">
+    <div class="panel-heading" style="position: relative;">
+        <form class="form-inline">
+            <!--<label>试卷标题</label>-->
+            <input type="text" ng-model="paper.paper_title" placeholder="请输入试卷标题" class="form-control"
+                   style="width: 60vw;">
+        </form>
+
+        <a href="" class="btn btn-primary" style="position:absolute;right:5px;top:12px;"
+           ng-click="savePaper()">保存试卷</a>
+
+    </div>
+    <table class="table table-bordered table-condensed table-hover">
+        <thead>
+        <tr style="background: #111;">
+            <td colspan="3" style="padding:0;">
+                <form class="form-inline text-center" style="background-color:#111;padding:3px;" uv-sticky="50">
+                    <a href="" class="btn btn-sm btn-default pull-left" ng-click="configQuestion()">选择题目</a>
+                    <span style="color: #29a4c9;height: 30px;line-height: 30px;">
+                        已选择单选题:{{sts.single_count}}道,共{{sts.single_score}}分;
+                        多选题:{{sts.multi_count}}道,共{{sts.multi_score}}分.总分:{{paper.score}}.
+                        及格分:<input type="text" ng-model="paper.pass_score" class="form-control"
+                                   style="height: 30px;width:55px;">
+                    </span>
+                    <div class="pull-right" ng-show="paper.questions.length > 0" style="padding-right: 27px;">
+                        <label style="color: #eee;font-weight: normal;">每题分值</label>
+                        <span class="btn-group btn-group-sm">
+                            <button class="btn" ng-class="score==1?'btn-primary':'btn-default'"
+                                    ng-click="changeScore(1)">
+                                1
+                            </button>
+                            <button class="btn" ng-class="score==2?'btn-primary':'btn-default'"
+                                    ng-click="changeScore(2)">
+                                2
+                            </button>
+                            <button class="btn" ng-class="score==3?'btn-primary':'btn-default'"
+                                    ng-click="changeScore(3)">
+                                3
+                            </button>
+                            <button class="btn" ng-class="score==4?'btn-primary':'btn-default'"
+                                    ng-click="changeScore(4)">
+                                4
+                            </button>
+                            <button class="btn" ng-class="score==5?'btn-primary':'btn-default'"
+                                    ng-click="changeScore(5)">
+                                5
+                            </button>
+                        </span>
+                        <input type="text" style="width:42px;height: 30px;" ng-model="score"
+                               ng-keyup="changeScore(score)" class="form-control">
+                    </div>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <th>题目</th>
+            <th style="width:46px;">分值</th>
+            <th style="width:20px;"><i class="glyphicon glyphicon-cog"></i></th>
+        </tr>
+        </thead>
+        <tr ng-repeat="q in paper.questions">
+            <td>
+                <div>
+                    {{q.qt_content}}
+                </div>
+                <div>
+                    <span class="btn btn-xs label-default" ng-repeat="opt in q.options"
+                          ng-class="opt.is_right==1?'text-success':''"
+                          style="margin: 3px;">
+                        {{opt.opt_title}}：{{opt.opt_content}}
+                        <i class="glyphicon glyphicon-ok" ng-show="opt.is_right==1"></i>
+                    </span>
+                </div>
+            </td>
+            <td style="vertical-align: middle;">
+                <input type="text" ng-model="q.score" style="width:42px;height:30px;" class="form-control"
+                       ng-keyup="stsQuestion()">
+            </td>
+            <td style="vertical-align: middle;">
+                <i class="glyphicon glyphicon-trash" ng-click="delQuestion($index)"
+                   style="cursor: pointer;"></i>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<script type="text/ng-template" id="question-input">
+    <div class="panel panel-default" style="margin:-170px -30vw -20px;position: fixed;width: 93vw;">
+        <div class="panel-heading">
+            <form class="form-inline">
+                <!--<label>题目列表</label>-->
+                <input type="text" class="form-control" style="height:24px;width:90vw;"
+                       placeholder="输入题目信息筛选(不影响选中题目)" ng-model="query.qt_content">
+            </form>
+        </div>
+
+        <div style="max-height: 80vh;overflow: auto;">
+            <div>
+                <button class="btn btn-xs" ng-click="random.show=!random.show"
+                        ng-class="random.show?'btn-info':'btn-link'">随机选题
+                </button>
+                <button class="btn btn-xs" ng-click="justSelect()"
+                        ng-class="just_select?'btn-info':'btn-link'">只看选中
+                </button>
+
+                <form class="form-horizontal well well-sm" ng-show="random.show">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">单选题数量与分值</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control pull-left" placeholder="请输入单选题数量"
+                                   ng-model="random.single_select_count"
+                                   style="position: relative;float:left;width:150px;margin-right: 10px;">
+                            <input type="text" class="form-control pull-left" placeholder="请输入单选题分值"
+                                   ng-model="random.single_select_score"
+                                   style="position: relative;float:left;width:150px;margin-right: 10px;">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">多选题数量与分值</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="请输入多选题数量"
+                                   ng-model="random.multi_select_count"
+                                   style="position: relative;float:left;width:150px;margin-right: 10px;">
+                            <input type="text" class="form-control" placeholder="请输入多选题分值"
+                                   ng-model="random.multi_select_score"
+                                   style="position: relative;float:left;width:150px;margin-right: 10px;">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <a href="" class="btn btn-info btn-sm" ng-click="createRandom()">确定随机生成</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <table class="table table-condensed table-hover table-bordered">
+                <thead>
+                <th style="width: 22px;">
+                    <!--<input type="checkbox" ng-click="toggleSelect()">-->
+                </th>
+                <th style="width: 50px;">#</th>
+                <th>题目信息</th>
+                </thead>
+                <tr ng-show="questions.length ==0">
+                    <td colspan="3" style="font-size: 13px;">
+                        课程[{{course.cos_name}}]没有任何题目,请
+                        <a href="" ui-sref="exam.question.list({course_id:course.cos_id})"
+                           style="margin-top:-1px;padding-left: 0;margin-left: 0;"
+                           class="btn btn-xs btn-link" ng-click="closeThisDialog(0)">编写题目</a>
+                    </td>
+                </tr>
+                <tr ng-repeat="q in questions|filter:query|limitTo:1000" ng-click="q.selected = !q.selected">
+                    <td>
+                        <input type="checkbox" ng-model="q.selected" ng-click="q.selected = !q.selected">
+                    </td>
+                    <td>{{q.qt_id}}</td>
+                    <td>{{q.qt_content}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="panel-footer text-center" style="overflow: hidden;">
+            <button class="btn btn-sm btn-primary" ng-click="closeThisDialog(1)" style="width: 20vw;">确定</button>
+            <!--<a class="btn btn-sm btn-default pull-right" ng-click="closeThisDialog(0)" style="margin-right:5px;">取消</a>-->
+        </div>
+    </div>
+</script>
+
+<style>
+    .text-success {
+        color: #449d44 !important;
+    }
+
+    .label-default {
+        background-color: #f2f2f2;
+        color: #666;
+        border: 1px solid #ddd;
+    }
+</style>

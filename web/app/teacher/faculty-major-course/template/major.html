@@ -1,0 +1,172 @@
+<div class="row">
+    <span class="col-sm-1">
+        <span class="btn btn-info" ng-class="is_filter?'active':''" ng-click="is_filter=!is_filter;query={}">
+            <i class="glyphicon glyphicon-filter"></i>
+        </span>
+    </span>
+    <span class="col-sm-4">
+        <select ng-model="query.fac_id" class="form-control form-group-sm" ng-disabled="!is_filter"
+                ng-options="fac.fac_id as fac.fac_name for fac in {{[{fac_name:'全部院系'}].concat(facs)}}"></select>
+    </span>
+    <span class="col-sm-4">
+        <input type="text" ng-model="query.$" class="form-control" placeholder="输入专业名称或编号筛选"
+               ng-disabled="!is_filter">
+    </span>
+    <span class="col-sm-3">
+        <a href="" class="btn btn-primary pull-right" ng-click="add()">新增专业</a>
+    </span>
+</div>
+<hr>
+<table class="table table-condensed table-striped table-hover">
+    <thead>
+    <th>
+        <span class="col-sm-1">#</span>
+        <span class="col-sm-4">院系名称</span>
+        <span class="col-sm-4">专业名称</span>
+        <span class="col-sm-2">专业编号</span>
+        <span class="col-sm-1"><i class="glyphicon-cog glyphicon pull-right" style="right: 5px;"></i></span>
+    </th>
+    </thead>
+    <tr ng-repeat="m in majors | filter:filter">
+        <td>
+            <div class="container-fiuld row">
+                <span class="col-sm-1">{{$index + 1}}</span>
+                <span class="col-sm-4">{{facs_json[m.fac_id]}}</span>
+                <span class="col-sm-4">{{m.major_name}}</span>
+                <span class="col-sm-2">{{m.major_no}}</span>
+                <span class="col-sm-1 pull-right text-right" id="opr">
+                    <a href="" class="btn btn-link btn-xs" ng-click="getMajorCourse(m)" tooltip="配置课程"
+                       tooltip-popup-delay="1000">
+                        <i class="glyphicon glyphicon-indent-left"></i>
+                    </a>
+                    <a href="" class="btn btn-link btn-xs" ng-click="modify(m)" tooltip="修改"
+                       tooltip-popup-delay="1000">
+                        <i class="glyphicon glyphicon-pencil"></i>
+                    </a>
+                    <a href="" class="btn btn-link btn-xs" ng-click="del(m)" tooltip="删除"
+                       tooltip-popup-delay="1000">
+                        <i class="glyphicon glyphicon-trash text-danger"></i>
+                    </a>
+                </span>
+            </div>
+            <div ng-show="m.show_course" style="padding: 2px 10px;" class="container-fiuld">
+                <div class="well-sm" style="margin: 2px -10px;padding: 2px;overflow: auto;">
+                    <span class="btn btn-xs btn-warning course pull-left" ng-repeat="c in m.courses">
+                        {{c.cos_name}}
+                        <i class="glyphicon glyphicon-remove-circle course-del text-danger"
+                           ng-click="delMajorCourse(m, $index)"></i>
+                    </span>
+                    <span class="btn btn-xs btn-success pull-left"
+                          style="border-style: dashed;width: 50px;margin-top: 3px;margin-left: 5px;"
+                          ng-click="addMajorCourse(m)">
+                        <i class="glyphicon glyphicon-plus" style="color: #eee;"></i>
+                    </span>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+<style>
+    #opr a i {
+        padding: 1px 0;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    #opr a {
+        padding-left: 0;
+        padding-right: 0;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .course {
+        position: relative;
+        margin: 3px 5px;
+        min-width: 50px;
+    }
+
+    .course .course-del {
+        display: none;
+        position: absolute;
+        right: -6px;
+        top: -6px;
+        cursor: pointer;
+    }
+
+    .course:hover .course-del {
+        display: block;
+    }
+</style>
+
+
+<script type="text/ng-template" id="data-input">
+    <div class="panel panel-primary" style="margin:-20px;">
+        <div class="panel-body">
+            <br>
+
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">归属院系选择</label>
+
+                    <div class="col-sm-8">
+                        <select class="form-control" ng-model="_major.fac_id"
+                                ng-options="f.fac_id as f.fac_name for f in facs"></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">专业名称</label>
+
+                    <div class="col-sm-8">
+                        <input ng-model="_major.major_name" type="text" class="form-control" placeholder="请输入专业名称">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">专业编号</label>
+
+                    <div class="col-sm-8">
+                        <input ng-model="_major.major_no" type="text" class="form-control" placeholder="请输入专业编号">
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <div class="panel-footer" style="overflow: hidden;">
+            <button class="btn btn-sm btn-primary pull-right" ng-click="closeThisDialog(_major)">确定</button>
+            <a class="btn btn-sm btn-default pull-right" ng-click="closeThisDialog()" style="margin-right:5px;">取消</a>
+        </div>
+    </div>
+</script>
+
+
+<script type="text/ng-template" id="data-input2">
+    <div class="panel panel-primary" style="margin:-20px;">
+        <div class="panel-body">
+            <br>
+
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">选择课程</label>
+
+                    <div class="col-sm-8">
+                        <ui-select ng-model="_course.selected" theme="bootstrap">
+                            <ui-select-match placeholder="输入或者选择一个课程">
+                                {{$select.selected.cos_name}}
+                            </ui-select-match>
+                            <ui-select-choices repeat="c in courses | filter: $select.search | limitTo:15">
+                                <span ng-bind-html="c.cos_id | highlight: $select.search"></span>-
+                                <span ng-bind-html="c.cos_name | highlight: $select.search"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="panel-footer" style="overflow: hidden;">
+            <button class="btn btn-sm btn-primary pull-right"
+                    ng-click="closeThisDialog({course:_course.selected})">确定
+            </button>
+            <a class="btn btn-sm btn-default pull-right" ng-click="closeThisDialog()" style="margin-right:5px;">取消</a>
+        </div>
+    </div>
+</script>

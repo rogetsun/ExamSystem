@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+        PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="Major">
+
+    <select id="selectAll" resultClass="net.sf.json.JSONObject">
+        select * from major
+    </select>
+    <select id="selectByID" resultClass="net.sf.json.JSONObject" parameterClass="int">
+        select * from major where major_id = #id#
+    </select>
+    <select id="selectMajorCourse" resultClass="net.sf.json.JSONObject" parameterClass="int">
+        select a.*,b.major_id from course a, major_course b
+        where a.cos_id=b.cos_id and b.major_id = #id#
+    </select>
+    <select id="selectMajorNoCourses" parameterClass="int" resultClass="net.sf.json.JSONObject">
+        select a.* from course a
+        where a.cos_id not in
+        (select cos_id from major_course b where b.major_id=#majorID#)
+    </select>
+
+    <update id="update" parameterClass="java.util.HashMap">
+        update major
+        set major_name=#major_name#, fac_id=#fac_id#, major_no=#major_no#
+        where major_id=#major_id#
+    </update>
+
+    <insert id="insert" parameterClass="java.util.HashMap">
+        insert into major (fac_id, major_name, major_no) values( #fac_id#, #major_name#, #major_no#)
+        <selectKey resultClass="int" type="post">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <insert id="insertMajorCourse" parameterClass="java.util.HashMap">
+        insert into major_course(major_id, cos_id)values(#major_id#, #cos_id#)
+    </insert>
+    <delete id="deleteByID" parameterClass="int">
+        delete from major where major_id=#id#
+    </delete>
+
+    <delete id="deleteByFacID" parameterClass="int">
+        delete from major where fac_id = #id#
+    </delete>
+    <delete id="deleteMajorCourse" parameterClass="java.util.HashMap">
+        delete from major_course where major_id=#major_id# and cos_id=#cos_id#
+    </delete>
+    <delete id="deleteMajorCourses" parameterClass="int">
+        delete from major_course where major_id=#major_id#
+    </delete>
+
+</sqlMap>

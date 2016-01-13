@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+        PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="ExamPublish">
+
+    <select id="selectByExamID" resultClass="net.sf.json.JSONObject" parameterClass="int">
+        select a.exam_id,b.* from exam_publish a, class b where exam_id = #id# and a.cls_id=b.cls_id
+    </select>
+
+    <insert id="insert" parameterClass="java.util.HashMap">
+        insert into exam_publish (exam_id, cls_id)
+        values(#exam_id#, #cls_id#)
+        <selectKey resultClass="int" type="post">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <delete id="deleteByExamID" parameterClass="int">
+        delete from exam_publish where exam_id=#id#
+    </delete>
+
+</sqlMap>

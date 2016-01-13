@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+        PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="PaperQuestion">
+
+    <select id="selectByPaperID" resultClass="net.sf.json.JSONObject" parameterClass="int">
+        select a.paper_id,b.* from paper_question a, question b where paper_id = #id# and a.qt_id = b.qt_id
+    </select>
+
+    <select id="selectQuestionsOptionsByPaperID" parameterClass="int" resultClass="net.sf.json.JSONObject">
+        select a.paper_id, a.score,
+        b.cos_id, b.qt_id, b.qt_content,b.is_multi,
+        c.opt_id, c.opt_title, c.opt_content,c.is_right
+        from paper_question a, question b, question_option c
+        where a.qt_id = b.qt_id
+        and b.qt_id = c.qt_id
+        and a.paper_id = #id#
+    </select>
+    <select id="selectQuestionsRightAnswerByPaperID" parameterClass="int" resultClass="net.sf.json.JSONObject">
+        SELECT a.*, group_concat(b.opt_title) as answer, c.score from question a, question_option b, paper_question c
+        where a.qt_id = b.qt_id
+        and c.qt_id = b.qt_id
+        and b.is_right = '1'
+        and c.paper_id = #id#
+        GROUP BY a.qt_id;
+    </select>
+    <!--<update id="update" parameterClass="java.util.HashMap">-->
+    <!--update paper_question-->
+    <!--set qt_content=#qt_content#, is_multi=#is_multi#, cos_id=#cos_id#-->
+    <!--where qt_id=#qt_id#-->
+    <!--</update>-->
+
+    <insert id="insert" parameterClass="java.util.HashMap">
+        insert into paper_question (paper_id, qt_id, score)
+        values(#paper_id#, #qt_id#,#score#)
+        <selectKey resultClass="int" type="post">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <delete id="deleteByPaperID" parameterClass="int">
+        delete from paper_question where paper_id=#id#
+    </delete>
+
+</sqlMap>

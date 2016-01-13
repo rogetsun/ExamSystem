@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+        PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="Course">
+
+    <select id="selectAll" resultClass="net.sf.json.JSONObject">
+        select * from course
+    </select>
+    <select id="selectByID" resultClass="net.sf.json.JSONObject" parameterClass="int">
+        select * from course where cos_id = #id#
+    </select>
+
+    <update id="update" parameterClass="java.util.HashMap">
+        update course
+        set cos_name=#cos_name#,cos_credit=#cos_credit#
+        where cos_id=#cos_id#
+    </update>
+
+    <insert id="insert" parameterClass="java.util.HashMap">
+        insert into course (cos_name, cos_credit) values( #cos_name#, #cos_credit#)
+        <selectKey resultClass="int" type="post">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <delete id="deleteByID" parameterClass="int">
+        delete from course where cos_id=#id#
+    </delete>
+
+    <delete id="deleteMajorCourseRelaByCosID" parameterClass="int">
+        delete from major_course where cos_id=#id#
+    </delete>
+</sqlMap>

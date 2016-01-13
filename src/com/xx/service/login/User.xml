@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+        PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="User">
+
+    <select id="selectTeacherByLogin" resultClass="net.sf.json.JSONObject" parameterClass="String">
+        select * from teacher where tch_login = #login#
+    </select>
+    <select id="selectStudentByLogin" resultClass="net.sf.json.JSONObject" parameterClass="String">
+        select * from student where std_login = #login#
+    </select>
+</sqlMap>
