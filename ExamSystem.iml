@@ -26,7 +26,6 @@
     <orderEntry type="library" name="Spring-4.2.4.RELEASE" level="project" />
     <orderEntry type="library" name="Spring MVC-4.2.4.RELEASE" level="project" />
     <orderEntry type="library" name="json-lib" level="application" />
-    <orderEntry type="library" name="jackson-2.5.0" level="application" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
@@ -82,5 +81,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="ExamSystem node_modules" level="project" />
+    <orderEntry type="library" name="Jackson2.5" level="application" />
   </component>
 </module>

@@ -3,6 +3,7 @@ package com.xx.router;
 import com.uv.utils.Log;
 import com.xx.service.login.UserService;
 import net.sf.json.JSONObject;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,7 @@ import java.util.Enumeration;
 /**
  * Created by uv2sun on 15/12/19.
  */
-//@Controller
+@Controller
 public class TestRouter {
 
     @Resource
