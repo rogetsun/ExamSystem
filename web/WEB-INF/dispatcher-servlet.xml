@@ -33,17 +33,19 @@
         </property>
     </bean>
 
-    <!--支持json的返回视图 spring2.x的产物,4根本不需要-->
+    <!--支持json的返回视图 spring2.x的产物,
+    4根本不需要,引入jackson.jar包,加上@ResponseBody注解即可;
+    所以上面的转换器也不需要配置了-->
     <!--<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">-->
-        <!--<property name="order" value="1"/>-->
-        <!--<property name="defaultViews">-->
-            <!--<list>-->
-                <!--&lt;!&ndash;可以使用jackson或者阿里的fastjson&ndash;&gt;-->
-                <!--&lt;!&ndash;<bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>&ndash;&gt;-->
-                <!--&lt;!&ndash;<ref bean="mappingJackson2JsonView"/>&ndash;&gt;-->
-                <!--<ref bean="fastJsonJsonView"/>-->
-            <!--</list>-->
-        <!--</property>-->
+    <!--<property name="order" value="1"/>-->
+    <!--<property name="defaultViews">-->
+    <!--<list>-->
+    <!--&lt;!&ndash;可以使用jackson或者阿里的fastjson&ndash;&gt;-->
+    <!--&lt;!&ndash;<bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;<ref bean="mappingJackson2JsonView"/>&ndash;&gt;-->
+    <!--<ref bean="fastJsonJsonView"/>-->
+    <!--</list>-->
+    <!--</property>-->
     <!--</bean>-->
 
     <!--默认返回视图时,用的viewResolver-->
