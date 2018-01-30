@@ -1073,7 +1073,7 @@ angular.module(
             uvLoadingProvider.setLoadingGif('assets/diy/uv-loading/loading.gif');
             $urlRouterProvider.otherwise("/index");
             //  去掉URL的"#"
-            $locationProvider.html5Mode(true);
+            // $locationProvider.html5Mode(true);
             $stateProvider
                 .state('index', {
                     url: '/index',

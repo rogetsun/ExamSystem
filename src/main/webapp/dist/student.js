@@ -16,7 +16,7 @@ angular.module(
     .config(['$stateProvider', '$urlRouterProvider', 'uvLoadingProvider', '$locationProvider',
         function ($stateProvider, $urlRouterProvider, uvLoadingProvider, $locationProvider) {
             uvLoadingProvider.setLoadingGif('assets/diy/uv-loading/loading.gif');
-            $locationProvider.html5Mode(true);
+            // $locationProvider.html5Mode(true);
             $urlRouterProvider.otherwise("/index/main");
             $stateProvider
                 .state('index', {
