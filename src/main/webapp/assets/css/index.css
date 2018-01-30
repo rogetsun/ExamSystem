@@ -56,7 +56,7 @@ ul {
     .header .logo-container .logo:before {
       content: '';
       float: left;
-      background-size: 41.66667px;
+      background-size: 41.6666666667px;
       background-image: url(../images/logox.png);
       background-position: center;
       background-repeat: no-repeat;
@@ -78,14 +78,14 @@ ul {
       width: 80%;
       outline: none;
       height: 25px;
-      font-size: 14.28571px;
+      font-size: 14.2857142857px;
       color: #0084D5; }
       .header .search-container .header-search:hover {
         outline: none; }
   .header .header-menu {
     float: right;
     margin-right: 20px;
-    font-size: 14.28571px; }
+    font-size: 14.2857142857px; }
     .header .header-menu ul {
       margin: 0;
       padding: 0; }
