@@ -21,56 +21,6 @@
     <context:component-scan base-package="com.xx.service"/>
 
 
-    <!--jackson转换器-->
-    <bean id="mappingJackson2JsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
-    <!--fastjson转换器-->
-    <bean id="fastJsonJsonView" class="com.alibaba.fastjson.support.spring.FastJsonJsonView">
-        <property name="features">
-            <list>
-                <value>QuoteFieldNames</value>
-                <value>WriteMapNullValue</value>
-            </list>
-        </property>
-    </bean>
-
-    <!--支持json的返回视图 spring2.x的产物,
-    4根本不需要,引入jackson.jar包,加上@ResponseBody注解即可;
-    所以上面的转换器也不需要配置了-->
-    <!--<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">-->
-    <!--<property name="order" value="1"/>-->
-    <!--<property name="defaultViews">-->
-    <!--<list>-->
-    <!--&lt;!&ndash;可以使用jackson或者阿里的fastjson&ndash;&gt;-->
-    <!--&lt;!&ndash;<bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>&ndash;&gt;-->
-    <!--&lt;!&ndash;<ref bean="mappingJackson2JsonView"/>&ndash;&gt;-->
-    <!--<ref bean="fastJsonJsonView"/>-->
-    <!--</list>-->
-    <!--</property>-->
-    <!--</bean>-->
-
-
-    <!--避免IE执行ajax时,返回json出现下载文件-->
-    <!--<bean id="mappingJacksonHttpMessageConverter"-->
-    <!--class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">-->
-    <!--<property name="supportedMediaTypes">-->
-    <!--<list>-->
-    <!--<value>TEXT_HTML</value>-->
-    <!--</list>-->
-    <!--</property>-->
-    <!--</bean>-->
-
-
-    <!-- 配置文件上传，如果没有使用文件上传可以不用配置，当然如果不配，那么配置文件中也不必引入上传组件包 -->
-    <!--<bean id="multipartResolver"-->
-    <!--class="org.springframework.web.multipart.commons.CommonsMultipartResolver">-->
-    <!--&lt;!&ndash; 默认编码 &ndash;&gt;-->
-    <!--<property name="defaultEncoding" value="utf-8"/>-->
-    <!--&lt;!&ndash; 文件大小最大值 &ndash;&gt;-->
-    <!--<property name="maxUploadSize" value="10485760000"/>-->
-    <!--&lt;!&ndash; 内存中的最大值 &ndash;&gt;-->
-    <!--<property name="maxInMemorySize" value="40960"/>-->
-    <!--</bean>-->
-
     <!--默认返回视图时,用的viewResolver-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="contentType" value="text/html"/>

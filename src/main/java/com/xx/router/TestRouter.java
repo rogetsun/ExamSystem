@@ -54,7 +54,7 @@ public class TestRouter {
 
     @RequestMapping("/index")
     public String index() {
-        return "WEB-INF/index"; //返回视图名称index
+        return "index"; //返回视图名称index
     }
 
     /**
