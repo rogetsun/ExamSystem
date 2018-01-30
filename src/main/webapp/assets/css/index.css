@@ -68,7 +68,7 @@ ul {
     display: inline-block;
     float: left; }
     .header .search-container .header-search {
-      background-image: url(../images/29-search.png);
+      background-image: url(../images/search.png);
       background-position: right;
       background-size: contain;
       background-repeat: no-repeat;
