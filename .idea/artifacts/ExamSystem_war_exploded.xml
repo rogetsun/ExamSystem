@@ -1,25 +1,45 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" build-on-make="true" name="ExamSystem:war exploded">
-    <output-path>$PROJECT_DIR$/out/artifacts/ExamSystem_war_exploded</output-path>
+    <output-path>$PROJECT_DIR$/target/exam</output-path>
     <root id="root">
-      <element id="javaee-facet-resources" facet="ExamSystem/web/Web" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="ExamSystem" />
         </element>
         <element id="directory" name="lib">
-          <element id="library" level="project" name="Spring-4.2.4.RELEASE" />
-          <element id="library" level="project" name="Spring MVC-4.2.4.RELEASE" />
-          <element id="library" level="application" name="json-lib" />
-          <element id="file-copy" path="$PROJECT_DIR$/../UVUtil/out/artifacts/UVUtil_jar/UVUtil.jar" />
-          <element id="file-copy" path="/Volumes/Transcend/lib/apache/log4j-1.2.17.jar" />
-          <element id="file-copy" path="/Volumes/Transcend/lib/mysql-connector-java-5.1.6-bin.jar" />
-          <element id="file-copy" path="/Volumes/Transcend/lib/ibatis-2.3.3.720.jar" />
-          <element id="file-copy" path="/Volumes/Transcend/lib/apache/commons-dbcp-1.2.2.jar" />
-          <element id="file-copy" path="/Volumes/Transcend/lib/apache/commons-pool-1.3.jar" />
-          <element id="library" level="application" name="Jackson2.5" />
+          <element id="library" level="project" name="Maven: com.alibaba:fastjson:1.2.45" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.6.5" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.6.5" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.6.5" />
+          <element id="library" level="project" name="Maven: log4j:log4j:1.2.17" />
+          <element id="library" level="project" name="Maven: net.sf.json-lib:json-lib:jdk15:2.4" />
+          <element id="library" level="project" name="Maven: commons-beanutils:commons-beanutils:1.8.0" />
+          <element id="library" level="project" name="Maven: commons-collections:commons-collections:3.2.1" />
+          <element id="library" level="project" name="Maven: commons-lang:commons-lang:2.5" />
+          <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.1.1" />
+          <element id="library" level="project" name="Maven: net.sf.ezmorph:ezmorph:1.0.6" />
+          <element id="library" level="project" name="Maven: commons-io:commons-io:2.5" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-context:4.3.8.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-aop:4.3.8.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-expression:4.3.8.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-core:4.3.8.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-beans:4.3.8.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:4.3.8.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-web:4.3.8.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:4.3.8.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-tx:4.3.8.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-aspects:4.3.8.RELEASE" />
+          <element id="library" level="project" name="Maven: org.aspectj:aspectjweaver:1.8.9" />
+          <element id="library" level="project" name="Maven: org.mybatis:mybatis:3.4.4" />
+          <element id="library" level="project" name="Maven: org.apache.commons:commons-dbcp2:2.1.1" />
+          <element id="library" level="project" name="Maven: org.apache.commons:commons-pool2:2.4.2" />
+          <element id="library" level="project" name="Maven: org.apache.ibatis:ibatis-sqlmap:2.3.4.726" />
         </element>
       </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/target/exam/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="ExamSystem/web/Web" />
     </root>
   </artifact>
 </component>
