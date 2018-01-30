@@ -39,7 +39,7 @@ public class LoginRouter {
             return "redirect:/";
         }
         System.out.println("to login");
-        return "login";
+        return "WEB-INF/login";
     }
 
     @RequestMapping(value = "/current_login", method = RequestMethod.GET)
@@ -111,9 +111,9 @@ public class LoginRouter {
             System.out.println("*****已存在登录用户,直接登录[" + o + "]");
             JSONObject jo = (JSONObject) o;
             if (jo.has("tch_id")) {
-                return "t-index";
+                return "WEB-INF/t-index";
             } else if (jo.has("std_id")) {
-                return "s-index";
+                return "WEB-INF/s-index";
             }
         }
         System.out.println("*****render login.html");

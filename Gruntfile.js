@@ -12,40 +12,40 @@ module.exports = function (grunt) {
                 },
                 // 源文件路径
                 src: [
-                    'web/assets/diy/**/*.js'
+                    'src/main/webapp/assets/diy/**/*.js'
                 ],
                 // 运行任务后生成的目标文件
-                dest: 'web/dist/pub.js'
+                dest: 'src/main/webapp/dist/pub.js'
             },
             teacher: {
                 options: {
                     banner: '/*!\n * <%= pkg.name %> - JS for Debug\n * @licence <%= pkg.name %> - v<%= pkg.version %> (<%= grunt.template.today("yyyy-mm-dd") %>)\n */\n'
                 },
                 src: [
-                    'web/app/teacher/**/*.js',
+                    'src/main/webapp/app/teacher/**/*.js',
                 ],
-                dest: 'web/dist/teacher.js'
+                dest: 'src/main/webapp/dist/teacher.js'
             },
             student: {
                 options: {
                     banner: '/*!\n * <%= pkg.name %> - JS for Debug\n * @licence <%= pkg.name %> - v<%= pkg.version %> (<%= grunt.template.today("yyyy-mm-dd") %>)\n */\n'
                 },
                 src: [
-                    'web/app/student/**/*.js',
+                    'src/main/webapp/app/student/**/*.js',
                 ],
-                dest: 'web/dist/student.js'
+                dest: 'src/main/webapp/dist/student.js'
             },
             teacher_resource: {
                 src: [
-                    'web/resource/teacher/**/*.js'
+                    'src/main/webapp/resource/teacher/**/*.js'
                 ],
-                dest: 'web/dist/teacher-resource.js'
+                dest: 'src/main/webapp/dist/teacher-resource.js'
             },
             student_resource: {
                 src: [
-                    'web/resource/student/**/*.js'
+                    'src/main/webapp/resource/student/**/*.js'
                 ],
-                dest: 'web/dist/student-resource.js'
+                dest: 'src/main/webapp/dist/student-resource.js'
             }
         },
         uglify: {
@@ -54,11 +54,11 @@ module.exports = function (grunt) {
                     banner: '/*!\n * <%= pkg.name %> - compressed JS\n * @licence <%= pkg.name %> - v<%= pkg.version %> (<%= grunt.template.today("yyyy-mm-dd") %>)\n  */\n'
                 },
                 files: {
-                    'web/dist/pub.min.js': ['<%= concat.pub.dest %>'],
-                    'web/dist/teacher.min.js': ['<%= concat.teacher.dest %>'],
-                    'web/dist/student.min.js': ['<%= concat.student.dest %>'],
-                    'web/dist/teacher-resource.min.js': ['<%= concat.teacher_resource.dest %>'],
-                    'web/dist/student-resource.min.js': ['<%= concat.student_resource.dest %>']
+                    'src/main/webapp/dist/pub.min.js': ['<%= concat.pub.dest %>'],
+                    'src/main/webapp/dist/teacher.min.js': ['<%= concat.teacher.dest %>'],
+                    'src/main/webapp/dist/student.min.js': ['<%= concat.student.dest %>'],
+                    'src/main/webapp/dist/teacher-resource.min.js': ['<%= concat.teacher_resource.dest %>'],
+                    'src/main/webapp/dist/student-resource.min.js': ['<%= concat.student_resource.dest %>']
                 }
 
             }

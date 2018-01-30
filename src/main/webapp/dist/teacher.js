@@ -1,6 +1,6 @@
 /*!
  * ExamSystem - JS for Debug
- * @licence ExamSystem - v1.0.0 (2016-01-13)
+ * @licence ExamSystem - v1.0.0 (2018-01-30)
  */
 /**
  * Created by uv2sun on 15/12/28.
@@ -1069,8 +1069,11 @@ angular.module(
     ])
     .config(['$urlRouterProvider', '$stateProvider', 'uvLoadingProvider', '$locationProvider',
         function ($urlRouterProvider, $stateProvider, uvLoadingProvider, $locationProvider) {
+            console.log("teacher config begin;");
             uvLoadingProvider.setLoadingGif('assets/diy/uv-loading/loading.gif');
             $urlRouterProvider.otherwise("/index");
+            //  去掉URL的"#"
+            $locationProvider.html5Mode(true);
             $stateProvider
                 .state('index', {
                     url: '/index',
@@ -1186,13 +1189,12 @@ angular.module(
                     }
                 });
 
-            //  去掉URL的"#"
-            $locationProvider.html5Mode(true);
-
+            console.log("teacher config over;")
         }])
     .run(['$state', '$rootScope', 'uvLoading', 'teacherService',
         function ($state, $rootScope, uvLoading, teacherService) {
             teacherService.select_login_teacher().then(function (res) {
+                console.log(res);
                 $rootScope.login_user = res.data;
                 $rootScope.login_user_id = res.data.tch_id;
             });
@@ -1201,11 +1203,13 @@ angular.module(
              * 同时判断如果改变大模块,则改变left_states
              */
             $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+                console.log("$stateChangeStart:" + fromState + "->" + toState);
                 uvLoading.loading();
 
             });
 
             $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+                console.log("$stateChangeStart:" + fromState + "->" + toState);
                 uvLoading.unloading();
                 $rootScope.current_state_name = toState.name;
                 var toStateArr = toState.name.split('.');

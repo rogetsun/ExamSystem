@@ -1,6 +1,6 @@
 /*!
  * ExamSystem - JS for Debug
- * @licence ExamSystem - v1.0.0 (2016-01-13)
+ * @licence ExamSystem - v1.0.0 (2018-01-30)
  */
 /**
  * Created by uv2sun on 15/12/15.
